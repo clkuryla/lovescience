@@ -1,0 +1,52 @@
+---
+title: "DataViz"
+author: "Christine Lucille Kuryla"
+date: "2025-01-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+colnames(love_science_pre_event_survey_burning_man_2024_final)
+
+hist(love_science_pre_event_survey_burning_man_2024_final$sexualFocusScore)
+
+colnames(love_science_pre_event_survey_burning_man_2024_final)
+#466:484
+#431:462
+
+# Relevant variables for dataviz
+score_vars <- colnames(love_science_pre_event_survey_burning_man_2024_final)[466:484]
+
+sapa_vars <- colnames(love_science_pre_event_survey_burning_man_2024_final[431:462])
+
+# Histograms of relevant variables
+love_science_pre_event_survey %>%
+  select(all_of(sapa_vars)) %>%
+  pivot_longer(cols = everything(),
+               names_to = "Variable",
+               values_to = "Value") %>% 
+  ggplot(aes(x = Value)) +
+  geom_histogram()+
+    # binwidth = 10,   # you can adjust binwidth for your data
+    #              fill = "steelblue",
+    #              color = "white",
+    #              alpha = 0.7) +
+  facet_wrap(~ Variable, 
+             scales = "fixed",
+             ncol = 6) +   # Adjust 'ncol' to control how many columns in the grid
+  theme_minimal()
+
+# Explore distributions by subsets for funsies
+
+# sapa_anxiety0to1
+# plansToGoToEventBurningMan2024
+# isEffectiveAltruist
+# isRationalist
+
+```
+
