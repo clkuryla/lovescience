@@ -4,7 +4,6 @@
 # Import data
 library(tidyverse)
 cluster_data <- read_csv("data/2024/burningman_2024/KM7_cluster_4_regret_6-9_eval_64-59_skew_g_64_sz_253.csv") %>% 
-  filter(!(id == "Jim Glaser")) %>% 
   mutate(color = case_match(label,
                             0 ~ "red",
                             1 ~ "orange",
